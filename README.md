@@ -37,7 +37,7 @@ The `ebreak` instruction stops the program at the end, likely for debugging purp
 * This code demonstrates the basics of assembly programming for RISC-V.
 * 
 “fixed_point_unit.v”:
-This code snippet appears to be written in Verilog, a hardware description language commonly used for designing digital circuits. Let's break it down:
+This code shows a hardware description language commonly used for designing digital circuits.
 
 **1. `include "Defines.vh"`**
 
