@@ -1,5 +1,5 @@
 “Assembly.s”:
-This code snippet is written in **assembly language**, specifically for the **RISC-V** architecture. It demonstrates a basic mathematical computation, likely intended for calculating the Euclidean distance between two points. Let's break it down:
+
 
 **1. Initialization:**
 
