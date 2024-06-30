@@ -43,7 +43,32 @@ module Fixed_Point_Unit
         /*
          *  Describe Your Square Root Calculator Circuit Here.
          */
-
+       module sqrt16 (
+    input [15:0] radicand,
+    output [7:0] root
+);
+    reg [15:0] remainder;
+    reg [7:0] root_reg;
+    reg [3:0] i;
+    
+    always @(*) begin
+        remainder = 0;
+        root_reg = 0;
+        for (i = 4'hF; i >= 0; i = i - 1) begin
+            root_reg = {root_reg[6:0], 1'b1};
+            if (remainder >= (root_reg << 1)) begin
+                remainder = remainder - (root_reg << 1);
+                root_reg = root_reg + 1;
+            end else begin
+                root_reg = root_reg - 1;
+            end
+            root_reg = root_reg >> 1;
+            remainder = (remainder << 2) | (radicand >> (i * 2) & 2'b11);
+        end
+    end
+    
+    assign root = root_reg;
+endmodule
     // ------------------ //
     // Multiplier Circuit //
     // ------------------ //   
