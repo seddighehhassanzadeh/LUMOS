@@ -94,7 +94,26 @@ endmodule
         /*
          *  Describe Your 32-bit Multiplier Circuit Here.
          */
-         
+         module Multiplier32
+         (
+            input wire [31:0] operand_1,
+            input wire  [31:0] operand_2,
+            output reg [63:0] product
+          );
+       wire [31:0] product0, product1, product2, product3;
+       wire [31:0] operand_1_high = operand_1[31:16];
+       wire [31:0] operand_1_low = operand_1[15:0];
+       wire [31:0] operand_2_high = operand_2[31:16];
+       wire [31:0] operand_2_low = operand_2[15:0];
+    
+    
+    Multiplier m1 (.operand_1(operand_1_low), .operand_2(operand_2_low), .product(product0));     
+    Multiplier m2 (.operand_1(operand_1_high), .operand_2(oprand2_low), .product(product1));  
+    Multiplier m3 (.operand_1(operand_1_low), .operand_2(operand_2_high), .product(product2));   
+    Multiplier m4 (.operand_1(operand_1_high), .operand_2(operand_2_high), .product(product3));  
+    
+
+endmodule 
 endmodule
 
 module Multiplier
