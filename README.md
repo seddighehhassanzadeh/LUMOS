@@ -37,40 +37,6 @@ The `ebreak` instruction stops the program at the end, likely for debugging purp
 * This code demonstrates the basics of assembly programming for RISC-V.
 * 
 “fixed_point_unit.v”:
-This code shows a hardware description language commonly used for designing digital circuits.
-
-**1. `include "Defines.vh"`**
-
-* This line imports a header file named "Defines.vh." This file likely contains definitions for constants, data types, or other common components used within the module. The specific content of "Defines.vh" is not shown, but it would provide some context and potential shared elements for this module.
-
-**2. `module Fixed_Point_Unit`**
-
-* This line declares a module named `Fixed_Point_Unit`, which acts as a building block for a digital circuit.
-
-**3. `#(parameter WIDTH = 32, parameter FBITS = 10)`**
-
-* This section defines two parameters for the module:
-    * `WIDTH`: This sets the total bit width of the operands and result to 32 bits.
-    * `FBITS`: This sets the number of fractional bits to 10, meaning the fixed-point numbers will have 10 bits representing the fractional part and (32 - 10) = 22 bits representing the integer part.
-
-**4. `(input wire clk, input wire reset, ...)`**
-
-* This section defines the module's input and output ports:
-    * `clk`: A clock signal that synchronizes the operation of the module.
-    * `reset`: An asynchronous reset signal that initializes the module to a known state.
-    * `operand_1` and `operand_2`: These are 32-bit inputs representing the two operands for the fixed-point operation.
-    * `operation`: A 2-bit input that specifies the type of operation to be performed (e.g., addition, subtraction, multiplication).
-    * `result`: A 32-bit output that will hold the result of the fixed-point operation.
-    * `ready`: A 1-bit output that indicates whether the calculation is complete and the `result` is valid.
-
-**5. `output reg [WIDTH - 1 : 0] result, output reg ready`**
-
-* This section declares the `result` and `ready` outputs as registers. This means their values are stored internally within the module and can change asynchronously from the inputs.
-
-**Overall:**
-
-
-The next lines implements a simple Floating-Point Unit (FPU) with basic arithmetic operations. Let's break down each part:
 
 **1.  `always @(*)` block:**
 
@@ -82,11 +48,6 @@ The next lines implements a simple Floating-Point Unit (FPU) with basic arithmet
       - **`FPU_SQRT`:** If the `operation` is `FPU_SQRT`, the code assigns the pre-calculated `root` to the `result` and sets `ready` to `root_ready`.
       - **`default`:** If the `operation` doesn't match any of the above cases, the `result` is set to 'bz (unknown value), and `ready` is set to 0, indicating an invalid operation.
 
-**2.  `always @(posedge reset)` block:**
-
-   - This block describes a **sequential logic** circuit, meaning it reacts to changes at the positive edge of the `reset` signal.
-   - **`if (reset)`:** If the `reset` signal is high (active high), the `ready` signal is set to 0, clearing the FPU.
-   - **`else`:** If the `reset` is low, the `ready` signal is set to 'bz, indicating the FPU is ready to receive new operations.
 
 **3. Square Root Circuit:**
 
@@ -108,9 +69,6 @@ The next lines implements a simple Floating-Point Unit (FPU) with basic arithmet
 
 **Overall, the code implements a simple FPU that can perform basic arithmetic operations (addition, subtraction, multiplication, square root). It relies on pre-calculated results for multiplication and square root, likely obtained from separate units.**
 
-
-From line 50 we have a hardware description language commonly used to design digital circuits. It describes a module responsible for multiplying two 16-bit numbers and storing the 32-bit result. Let's break it down:
-
 **1. Declarations:**
 
 - `reg [64 - 1 : 0] product;`: This line declares a register named `product` that can hold a 64-bit value. It's used to store the final product of the multiplication. The `reg` keyword signifies that this is a register, a memory element that can store a value.
@@ -126,29 +84,6 @@ From line 50 we have a hardware description language commonly used to design dig
     - `operand_1` and `operand_2` are input ports of the `Multiplier` module, and they are connected to the registers `multiplierCircuitInput1` and `multiplierCircuitInput2`, respectively.
     - `product` is an output port of the `Multiplier` module, and it is connected to the wire `multiplierCircuitResult`.
 
-**3. Partial Products:**
-
-- `reg [31 : 0] partialProduct1;`
-- `reg [31 : 0] partialProduct2;`
-- `reg [31 : 0] partialProduct3;`
-- `reg [31 : 0] partialProduct4;`: These lines declare four 32-bit registers to hold partial products.  This suggests that the multiplication is being implemented using a series of partial products. It is common in hardware multiplication to break down the multiplication into smaller steps, generating partial products and then adding them together.
-
-**4. Multiplier Circuit Description (Missing)**
-
-- `/* Describe Your 32-bit Multiplier Circuit Here. */`:  This comment indicates that the actual implementation of the multiplication process is missing. The design of the "Multiplier" module would need to be specified here. This could involve a variety of techniques, including:
-    - **Basic Array Multiplier**: Using a network of AND gates and adders to compute the partial products.
-    - **Booth Algorithm**: A more efficient multiplication algorithm.
-    - **Combinational Logic**: A direct implementation using a complex combination of logic gates.
-
-**5. Endmodule:**
-
-- `endmodule`: This line marks the end of the module definition.
-
-**In Summary:**
-
-This code defines a module that multiplies two 16-bit numbers, producing a 32-bit result. It uses a separate "Multiplier" module to perform the multiplication and then stores the result in a 64-bit register. The partial products and the `product_ready` flag are used to manage the multiplication process, although the actual multiplier implementation is missing. This code snippet provides the outline of a hardware multiplier but needs further details regarding the "Multiplier" module's internal design.
-
-Frome line 75 we have a Hardware Description Language (HDL) used to design digital circuits. It describes a module called `Multiplier` that performs multiplication of two 16-bit integers. Let's break down the code:
 
 **1. Module Declaration:**
 
@@ -165,17 +100,6 @@ module Multiplier (
 * `input wire [15 : 0] operand_2`: Similar to `operand_1`, this declares another 16-bit input wire for the second operand.
 * `output reg [31 : 0] product`: This declares an output signal named `product`. It is a 32-bit wide register (meaning it can store a value) and its value will be produced by the module. 
 
-**2. Combinational Logic:**
-
-```verilog
-always @(*)
-begin
-    product <= operand_1 * operand_2;
-end
-```
-
-* `always @(*)`: This statement defines a combinational block. It means that the code inside the `begin` and `end` block will execute whenever any of the inputs (`operand_1` or `operand_2`) changes.
-* `product <= operand_1 * operand_2`: This is the core logic of the multiplier. It assigns the result of multiplying `operand_1` and `operand_2` to the output register `product`.
 
 **In Summary:**
 
