@@ -106,7 +106,32 @@ module Multiplier (
 * `input wire [15 : 0] operand_1`:  This declares an input signal named `operand_1`. It is a 16-bit wide wire (meaning it can carry a single value at a time) and its values will be provided externally to the module.
 * `input wire [15 : 0] operand_2`: Similar to `operand_1`, this declares another 16-bit input wire for the second operand.
 * `output reg [31 : 0] product`: This declares an output signal named `product`. It is a 32-bit wide register (meaning it can store a value) and its value will be produced by the module. 
+* explanation of square and multiplier modules
+  
+module Multiplier32
+This module takes two 32-bit operands as inputs and produces a 64-bit product as the output. It uses four smaller multipliers to break down the multiplication process into more manageable parts.
+Inputs: “operand_& operand_2”
+Outputs: ‘’product’’
+First of all operand_1 and operand_2 are split into high and low 16-bit parts. Then we Instantiate the Multipliers. Each instance multiplies different parts of the operand_1 and operand_2.
+m1 multiplies the lower 16 bits of both operands.
+m2 multiplies the upper 16 bits of operand_1 with the lower 16 bits of operand_2.
+m3 multiplies the lower 16 bits of operand_1 with the upper 16 bits of operand_2.
+m4 multiplies the upper 16 bits of both operands.
+Finally the output’s of each multiplies need to be combined to form the final 64-bit product.
 
+Module sqrt16
+
+This module calculates the integer part of the square root of a 16-bit radicand using a binary search.
+Input: radicand(16-bits)
+Output: root(8-bits)
+remainder is a 16-bit register that holds the remainder during the calculation. root_reg is an 8-bit register that holds the current approximation of the square root.  i is a 4-bit register used as a loop counter.
+ A for loop runs from 15 down to 0 (16 iterations), representing the bits of the input radicand.
+In each iteration, root_reg is updated by shifting left one bit and setting the least significant bit (LSB) to 1.
+The algorithm checks if the current remainder is greater than or equal to twice the current root_reg:
+If true, it subtracts twice the current root_reg from remainder and increments root_reg.
+If false, it decrements root_reg.
+root_reg is then right-shifted by one bit.
+remainder is updated by shifting left by 2 bits and OR'ing with the next two bits of the radicand
 
 **In Summary:**
 
