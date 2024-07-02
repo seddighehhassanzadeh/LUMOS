@@ -114,10 +114,10 @@ This code defines a simple multiplier module that takes two 16-bit input values 
 
 waveforms:
 
-
-
-
-![344779793-e45d7b4f-6f8d-4c9e-956a-1f2cec0a64d5](https://github.com/seddighehhassanzadeh/LUMOS/assets/160258792/3d47cf40-5a4e-4640-8651-8cf7660c6bf5)
+![1](https://github.com/mehraaaa/LUMOS/assets/159551279/e45d7b4f-6f8d-4c9e-956a-1f2cec0a64d5)
+![2](https://github.com/mehraaaa/LUMOS/assets/159551279/49145950-014f-4721-8707-cc9adf2f4ce0)
+![3](https://github.com/mehraaaa/LUMOS/assets/159551279/911a503b-1f99-4db0-9321-b2d53197f02e)
+![4](https://github.com/mehraaaa/LUMOS/assets/159551279/df43ed5b-d124-4cf0-bfa3-6d86514ff7a0)
 
 
 
