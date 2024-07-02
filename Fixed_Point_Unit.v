@@ -43,7 +43,33 @@ module Fixed_Point_Unit
         /*
          *  Describe Your Square Root Calculator Circuit Here.
          */
-       module sqrt16 (
+         
+
+    // ------------------ //
+    // Multiplier Circuit //
+    // ------------------ //   
+    reg [64 - 1 : 0] product;
+    reg product_ready;
+
+    reg     [15 : 0] multiplierCircuitInput1;
+    reg     [15 : 0] multiplierCircuitInput2;
+    wire    [31 : 0] multiplierCircuitResult;
+
+    Multiplier multiplier_circuit
+    (
+        .operand_1(multiplierCircuitInput1),
+        .operand_2(multiplierCircuitInput2),
+        .product(multiplierCircuitResult)
+    );
+
+    reg     [31 : 0] partialProduct1;
+    reg     [31 : 0] partialProduct2;
+    reg     [31 : 0] partialProduct3;
+    reg     [31 : 0] partialProduct4;
+
+endmodule
+
+module sqrt16 (
     input [15:0] radicand,
     output [7:0] root
 );
@@ -69,31 +95,6 @@ module Fixed_Point_Unit
     
     assign root = root_reg;
 endmodule
-    // ------------------ //
-    // Multiplier Circuit //
-    // ------------------ //   
-    reg [64 - 1 : 0] product;
-    reg product_ready;
-
-    reg     [15 : 0] multiplierCircuitInput1;
-    reg     [15 : 0] multiplierCircuitInput2;
-    wire    [31 : 0] multiplierCircuitResult;
-
-    Multiplier multiplier_circuit
-    (
-        .operand_1(multiplierCircuitInput1),
-        .operand_2(multiplierCircuitInput2),
-        .product(multiplierCircuitResult)
-    );
-
-    reg     [31 : 0] partialProduct1;
-    reg     [31 : 0] partialProduct2;
-    reg     [31 : 0] partialProduct3;
-    reg     [31 : 0] partialProduct4;
-
-        /*
-         *  Describe Your 32-bit Multiplier Circuit Here.
-         */
          module Multiplier32
          (
             input wire [31:0] operand_1,
@@ -111,9 +112,8 @@ endmodule
     Multiplier m2 (.operand_1(operand_1_high), .operand_2(oprand2_low), .product(product1));  
     Multiplier m3 (.operand_1(operand_1_low), .operand_2(operand_2_high), .product(product2));   
     Multiplier m4 (.operand_1(operand_1_high), .operand_2(operand_2_high), .product(product3));  
-    
 
-endmodule 
+         
 endmodule
 
 module Multiplier
