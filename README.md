@@ -1,3 +1,10 @@
+
+Name:Seddigheh hassanzadeh
+
+Team Members:mehra golalizadeh
+
+student id:400411432
+
 “Assembly.s”:
 
 
@@ -104,5 +111,19 @@ module Multiplier (
 **In Summary:**
 
 This code defines a simple multiplier module that takes two 16-bit input values and produces their 32-bit product. The `always @(*)` block ensures that the output `product` is updated whenever the inputs change, making it a purely combinational logic element.
+
+waveforms:
+
+
+
+
+![344779793-e45d7b4f-6f8d-4c9e-956a-1f2cec0a64d5](https://github.com/seddighehhassanzadeh/LUMOS/assets/160258792/3d47cf40-5a4e-4640-8651-8cf7660c6bf5)
+
+
+
+
+
+
+
 
 
